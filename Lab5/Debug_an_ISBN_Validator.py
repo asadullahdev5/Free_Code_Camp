@@ -74,6 +74,7 @@ def calculate_check_digit_10(main_digits_list):
         expected_check_digit = str(result)
     return expected_check_digit
 
+
 def calculate_check_digit_13(main_digits_list):
     digits_sum = 0
     # Multiply each of the first 12 digits by 1 and 3 alternately (starting with 1)
@@ -91,3 +92,42 @@ def calculate_check_digit_13(main_digits_list):
         expected_check_digit = str(result)
     return expected_check_digit
 
+
+def main(): 
+    user_input = input('Enter ISBN and length: ') 
+    
+    if ',' not in user_input: 
+        print("Enter comma-separated values.") 
+        return 
+        
+    values = user_input.split(',') 
+    isbn = values[0].strip() 
+    length_str = values[1].strip()
+    
+    if not length_str.isdigit(): 
+        print("Length must be a number.") 
+        return 
+        
+    length = int(length_str)
+    
+    if length == 10 or length == 13: 
+        # Verify requested length matches provided code length
+        if length == 10 and len(isbn) != 10:
+            print("ISBN-10 code should be 10 digits long.")
+            return
+
+        if length == 13 and len(isbn) != 13:
+            print("ISBN-13 code should be 13 digits long.")
+            return
+
+        # Rule 8: Character validation
+        is_valid_chars = isbn.isdigit() or (length == 10 and isbn[:-1].isdigit() and isbn[-1].upper() == 'X')
+        
+        if not is_valid_chars:
+            print("Invalid character was found.")
+            return
+            
+        # Safely run validation calculations
+        validate_isbn(isbn, length) 
+    else: 
+        print('Length should be 10 or 13.')
