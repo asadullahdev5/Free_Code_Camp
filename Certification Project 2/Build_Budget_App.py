@@ -108,7 +108,7 @@ def create_spend_chart(categories):
         if len(category.name) > max_length:
             max_length = len(category.name)
 
-    # Category names verticallyy
+    # Category names vertically
     for i in range(max_length):
 
         chart += "     "
