@@ -42,6 +42,6 @@ class Employee:
 charlie_brown = Employee('Charlie Brown', 'trainee')
 print(charlie_brown)
 
-
+print (f"Base Salary: ${charlie_brown._salary}")
 
    
